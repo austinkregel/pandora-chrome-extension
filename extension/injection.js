@@ -52,7 +52,9 @@ window.__Library = {
         } else {
             e();
         }
+        setTimeout(function(){
         __Library.events.updatePandora()
+        }, 500);
     }
 }
 
