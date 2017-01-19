@@ -1,0 +1,66 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+  <head>
+    <title>Getting Started Extension's Popup</title>
+    <style>
+      body {
+        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+        font-size: 100%;
+        padding: 15px;
+      }
+      #contributions {
+          font-size: 10px;
+      }
+      #status {
+        /* avoid an excessively wide status text */
+        white-space: pre;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 400px;
+      }
+    </style>
+
+    <!--
+      - JavaScript and HTML must be in separate files: see our Content Security
+      - Policy documentation[1] for details and explanation.
+      -
+      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
+     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Material+Icons" rel="stylesheet">
+  </head>
+  <body>
+  <style>
+    .yellow {
+      color: gold;
+    }
+  </style>
+    <div id="app">
+      <a href="#" @click.prevent="clickLike" :class="{yellow: currentIsLiked}">
+        <i class="material-icons">thumb_up</i>
+      </a>
+      <a href="#" @click.prevent="clickDislike">
+        <i class="material-icons">thumb_down</i>
+      </a>
+      <a href="#" @click.prevent="clickPause" v-show="!is_paused">
+        <i class="material-icons">pause</i>
+      </a>
+      <a href="#" @click.prevent="clickPlay" v-show="is_paused">
+        <i class="material-icons">play_arrow</i>
+      </a>
+      <a href="#" @click.prevent="clickNext">
+        <i class="material-icons" @click="clickNext">skip_next</i>
+      </a>
+      <pre>{{ pandora }}</pre>
+    </div>
+
+    <script src="jquery.js"></script>
+    <script src="vue.js"></script>
+    <script src="popup.js"></script>
+
+  </body>
+</html>
