@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Github contributions",
-  "description": "This extension displays your daily Github contributions.",
-  "version": "1.0",
+  "name": "Pandora Extension.",
+  "description": "It's your music. Play it where you want it.",
+  "version": "0.1",
   "background": {
     "scripts": [
       "background.js"
