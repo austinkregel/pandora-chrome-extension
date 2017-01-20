@@ -34,6 +34,9 @@ new Vue({
         },
         clickPlay() {
             this.broadcast('event:playSong');
+        },
+        changeStation(id) {
+            this.broadcast('station:' + id)
         }
     },
     mounted() {
