@@ -5,24 +5,26 @@
  value "popup.html".
  -->
 <html>
-  <head>
+<head>
     <title>Getting Started Extension's Popup</title>
     <style>
-      body {
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-        font-size: 100%;
-        padding: 15px;
-      }
-      #contributions {
-          font-size: 10px;
-      }
-      #status {
-        /* avoid an excessively wide status text */
-        white-space: pre;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        max-width: 400px;
-      }
+        body {
+            font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+            font-size: 100%;
+            padding: 15px;
+        }
+
+        #contributions {
+            font-size: 10px;
+        }
+
+        #status {
+            /* avoid an excessively wide status text */
+            white-space: pre;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-width: 400px;
+        }
     </style>
 
     <!--
@@ -32,35 +34,98 @@
       - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
      -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Material+Icons" rel="stylesheet">
-  </head>
-  <body>
-  <style>
-    .yellow {
-      color: gold;
+</head>
+<body>
+<style>
+    body{
+        margin: 0;
+        padding: 0;
     }
-  </style>
-    <div id="app">
-      <a href="#" @click.prevent="clickLike" :class="{yellow: currentIsLiked}">
-        <i class="material-icons">thumb_up</i>
-      </a>
-      <a href="#" @click.prevent="clickDislike">
-        <i class="material-icons">thumb_down</i>
-      </a>
-      <a href="#" @click.prevent="clickPause" v-show="!is_paused">
-        <i class="material-icons">pause</i>
-      </a>
-      <a href="#" @click.prevent="clickPlay" v-show="is_paused">
-        <i class="material-icons">play_arrow</i>
-      </a>
-      <a href="#" @click.prevent="clickNext">
-        <i class="material-icons" @click="clickNext">skip_next</i>
-      </a>
-      <pre>{{ pandora }}</pre>
+    #app {
+        background: #224099;
+        color: white;
+        text-align: center;
+        width: 300px;
+    }
+
+    .yellow {
+        color: gold;
+    }
+
+    a {
+        color: white;
+    }
+
+    .material-icons {
+        font-size: 3em;
+    }
+    i:active,
+    i:target {
+        color: #eeeeee;
+    }
+
+    pre {
+        text-align: left;
+    }
+
+    #stations {
+        width: 250px;
+        text-align: left;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    li {
+        list-style: none;
+        border-bottom: solid thin grey;
+        padding: 5px 5px 5px 0;
+        cursor:pointer;
+    }
+
+    li:active,
+    li:target {
+        background:rgba(0,0,0,0.1);
+    }
+</style>
+<div id="app">
+    <div style="padding: 10px 0 0 ;">
+        <b>{{ pandora.currentStation}}</b>
     </div>
+    <div style="padding: 10px 0 ;">
+        <a href="#" @click.prevent="clickLike" :class="{yellow: currentIsLiked}">
+            <i class="material-icons">thumb_up</i>
+        </a>
+        <a href="#" @click.prevent="clickDislike">
+            <i class="material-icons">thumb_down</i>
+        </a>
+        <a href="#" @click.prevent="clickPause" v-show="!is_paused">
+            <i class="material-icons">pause</i>
+        </a>
+        <a href="#" @click.prevent="clickPlay" v-show="is_paused">
+            <i class="material-icons">play_arrow</i>
+        </a>
+        <a href="#" @click.prevent="clickNext">
+            <i class="material-icons" @click="clickNext">skip_next</i>
+        </a>
+    </div>
+    <div>
+        {{ pandora.song }} <br/>
+        by {{ pandora.artist }}
+    </div>
+    <div>
+        <hr/>
+        <ul id="stations">
+            <li v-for="(station, index) in pandora.stations" @click.prevent="changeStation(index)">
+                {{ station }}
+            </li>
+        </ul>
+    </div>
+    <pre>{{ pandora }}</pre>
+</div>
 
-    <script src="jquery.js"></script>
-    <script src="vue.js"></script>
-    <script src="popup.js"></script>
+<script src="jquery.js"></script>
+<script src="vue.js"></script>
+<script src="popup.js"></script>
 
-  </body>
+</body>
 </html>
